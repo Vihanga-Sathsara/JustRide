@@ -10718,3 +10718,37 @@ Caused by: java.lang.UnsupportedClassVersionError: Preview features are not enab
 	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1578) ~[spring-beans-6.2.9.jar:6.2.9]
 	... 102 common frames omitted
 
+2025-09-21T18:51:48.585+05:30  INFO 10804 --- [JustRide] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-21T18:51:48.909+05:30  INFO 10804 --- [JustRide] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-21T18:51:48.910+05:30  INFO 10804 --- [JustRide] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-09-21T18:51:49.663+05:30  INFO 10804 --- [JustRide] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-21T18:51:49.664+05:30  INFO 10804 --- [JustRide] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 13720 ms
+2025-09-21T18:51:51.694+05:30  INFO 10804 --- [JustRide] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-21T18:51:52.779+05:30  INFO 10804 --- [JustRide] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.22.Final
+2025-09-21T18:51:53.218+05:30  INFO 10804 --- [JustRide] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-21T18:51:55.205+05:30  INFO 10804 --- [JustRide] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-21T18:51:55.768+05:30  INFO 10804 --- [JustRide] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-21T18:52:01.456+05:30  INFO 10804 --- [JustRide] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@54234569
+2025-09-21T18:52:01.458+05:30  INFO 10804 --- [JustRide] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-21T18:52:03.201+05:30  WARN 10804 --- [JustRide] [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-09-21T18:52:03.299+05:30  INFO 10804 --- [JustRide] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.39
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-21T18:52:07.303+05:30  INFO 10804 --- [JustRide] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-21T18:52:41.731+05:30  INFO 10804 --- [JustRide] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-21T18:52:43.627+05:30  INFO 10804 --- [JustRide] [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-21T18:52:49.243+05:30 DEBUG 10804 --- [JustRide] [main] lk.ijse.justride.util.JwtAuthFilter      : Filter 'jwtAuthFilter' configured for use
+2025-09-21T18:52:49.994+05:30  WARN 10804 --- [JustRide] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-21T18:52:50.105+05:30  INFO 10804 --- [JustRide] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-09-21T18:52:50.106+05:30  WARN 10804 --- [JustRide] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-09-21T18:52:50.561+05:30 DEBUG 10804 --- [JustRide] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 28 mappings in 'requestMappingHandlerMapping'
+2025-09-21T18:52:50.720+05:30 DEBUG 10804 --- [JustRide] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-09-21T18:52:50.871+05:30 DEBUG 10804 --- [JustRide] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-09-21T18:52:50.927+05:30 DEBUG 10804 --- [JustRide] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-09-21T18:52:51.407+05:30  INFO 10804 --- [JustRide] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-21T18:52:51.416+05:30  INFO 10804 --- [JustRide] [main] lk.ijse.justride.JustRideApplication     : Started JustRideApplication in 84.046 seconds (process running for 90.92)
