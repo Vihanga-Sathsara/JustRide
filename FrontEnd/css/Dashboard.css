@@ -1,0 +1,254 @@
+body{
+    margin:0;
+}
+
+#mapSection {
+    min-height: 500px;
+    height: auto;
+
+}
+
+#mapView {
+    height: 500px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+#detailSection{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(135deg, #1a252f 0%, #2c3e50 50%, #34495e 100%);
+    margin: 0;
+    padding: 0;
+    z-index: 10000;
+    color: #fffdfd;
+}
+
+#headerSection{
+    position: relative;
+    background-color: #3b4c5a;
+    margin-top: 0.1%;
+    color: white;
+}
+
+#contentSection{
+    background-color: rgba(131, 174, 220, 0.13);
+}
+
+#profilePhoto{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+#profilePhoto i{
+    font-size: 50px;
+}
+
+.btnHeader{
+    border-radius: 50%;
+    background-color: rgba(118, 117, 117, 0.01);
+    color: #ffffff;
+    border: none;
+}
+
+.card {
+    height: 100%;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    opacity: 0;
+    animation:slideUp 0.7s ease-out forwards;
+}
+
+.card-body {
+    height: 100%;
+}
+
+.cardIcon{
+    border-radius: 50%;
+    font-size: 2rem;
+    padding: 15px;
+    display: inline-block;
+    color: #fffdfd;
+}
+
+.card-text{
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.count{
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#totalRide {
+    background: linear-gradient(135deg, #0bef0c, #06a40f);
+}
+
+#totalSavings {
+    background: linear-gradient(135deg, #f80d5a, #d4063f);
+}
+
+#ratings {
+    background: linear-gradient(135deg, #fbe800, #f7d600);
+}
+
+#activeBonus {
+    background: linear-gradient(135deg, #5f00ff, #a700ff);
+}
+
+
+.staticsCards{
+    height: 150px;
+}
+
+.staticsCards:hover {
+    transform: translateY(-5px);
+    transition: ease 0.5s;
+}
+
+#rides{
+    border-left: 7px solid #06a40f;
+}
+
+#savings {
+    border-left: 7px solid #d4063f;
+    animation-delay: 0.2s;
+}
+
+#rating{
+    border-left: 7px solid #f7d600;
+    animation-delay: 0.4s;
+}
+
+#bonus{
+    border-left: 7px solid #5f00ff;
+    animation-delay: 0.6s;
+}
+
+#headerSection{
+    animation: slideUp 0.8s ease-out forwards;
+}
+
+
+@keyframes slideUp {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-content {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: none;
+}
+
+.modal-header {
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    color: white;
+    padding: 20px;
+    border-bottom: none;
+}
+
+.modal-title {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.modal-title i {
+    margin-right: 10px;
+    font-size: 1.5rem;
+}
+
+.modal-body {
+    padding: 30px;
+    text-align: center;
+}
+
+.verification-icon {
+    font-size: 4rem;
+    color: #4b6cb7;
+    margin-bottom: 20px;
+}
+
+.progress-container {
+    width: 100%;
+    height: 8px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 25px 0;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 45%;
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    border-radius: 4px;
+    animation: progressAnimation 1.5s infinite alternate;
+}
+
+@keyframes progressAnimation {
+    0% {
+        width: 45%;
+    }
+    100% {
+        width: 65%;
+    }
+}
+
+.verification-text {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-bottom: 5px;
+}
+
+.additional-info {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-top: 20px;
+}
+
+.btn-close {
+    filter: invert(1);
+}
+
+.spinner {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(75, 108, 183, 0.3);
+    border-radius: 50%;
+    border-top-color: #4b6cb7;
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.modal-footer {
+    border-top: none;
+    padding: 20px;
+    justify-content: center;
+}
+
+.btn-secondary {
+    background: linear-gradient(90deg, #6c757d 0%, #495057 100%);
+    border: none;
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+}

@@ -1,0 +1,814 @@
+body{
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+#mapDiv {
+    position: relative;
+    min-height: 500px;
+    height: auto;
+    display: none;
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+#mapButton{
+    position: absolute;
+    top: 4%;
+    right:4%;
+    z-index: 1000;
+}
+
+#taxiMapDiv{
+    min-height: 500px;
+    height: auto;
+}
+
+#taxiMap{
+    height: 500px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+#detailSection{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(135deg, #1a252f 0%, #2c3e50 50%, #34495e 100%);
+    margin: 0;
+    padding: 0;
+    z-index: 10000;
+    color: #fffdfd;
+}
+
+#headerSection{
+    position: relative;
+    background-color: #3b4c5a;
+    margin-top: 0.1%;
+    color: white;
+}
+
+#profilePhoto{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+#profilePhoto i{
+   font-size: 50px;
+}
+
+.btnHeader{
+    border-radius: 50%;
+    background-color: rgba(118, 117, 117, 0.01);
+    color: #ffffff;
+    border: none;
+}
+
+#getLocationSection{
+    background-color: #e6e8e8;
+}
+
+#pickupDiv , #pickupMapDiv{
+    border-radius: 15px;
+    background-color: rgb(255, 255, 255);
+}
+#pickupDiv i , #pickupMapDiv i{
+    font-size: 2rem;
+    color: #4b6cb7;
+}
+
+#pickupDiv h5 ,  #pickupMapDiv h5{
+    font-weight: bold;
+    color: #343a40;
+}
+
+#pickupDiv p ,  #pickupMapDiv p{
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+#btnGetCurrent {
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    width: 60%;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+#btnGetCurrent:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(75, 108, 183, 0.4);
+}
+
+#btnDrop , #btnPickup, #btnSetTime, #btnSetDate {
+    width: 30%;
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    color: white;
+    border: none;
+    padding: 7px 7px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+#bookRide input{
+    width: 70%;
+    height: 40px;
+}
+
+#btnBookNow{
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    width: 40%;
+}
+
+#contentSection{
+    background-color: rgba(131, 174, 220, 0.13);
+}
+
+
+.card {
+    height: 100%;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    opacity: 0;
+    animation:slideUp 0.7s ease-out forwards;
+}
+
+.card-body {
+    height: 100%;
+}
+
+.cardIcon{
+    border-radius: 50%;
+    font-size: 2rem;
+    padding: 15px;
+    display: inline-block;
+    color: #fffdfd;
+}
+
+.card-text{
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.count{
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#totalRide {
+    background: linear-gradient(135deg, #0bef0c, #06a40f);
+}
+
+#totalSavings {
+    background: linear-gradient(135deg, #f80d5a, #d4063f);
+}
+
+#ratings {
+    background: linear-gradient(135deg, #fbe800, #f7d600);
+}
+
+#activeBonus {
+    background: linear-gradient(135deg, #5f00ff, #a700ff);
+}
+
+
+.staticsCards{
+    height: 150px;
+}
+
+.staticsCards:hover {
+    transform: translateY(-5px);
+    transition: ease 0.5s;
+}
+
+#rides{
+    border-left: 7px solid #06a40f;
+}
+
+#savings {
+    border-left: 7px solid #d4063f;
+    animation-delay: 0.2s;
+}
+
+#rating{
+    border-left: 7px solid #f7d600;
+    animation-delay: 0.4s;
+}
+
+#bonus{
+    border-left: 7px solid #5f00ff;
+    animation-delay: 0.6s;
+}
+
+#taxiDiv{
+    display: none;
+    animation: slideUp 1s ease-out forwards;
+}
+
+#headerSection{
+    animation: slideUp 0.8s ease-out forwards;
+}
+
+
+@keyframes slideUp {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-content {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: none;
+}
+
+.modal-header {
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    color: white;
+    padding: 20px;
+    border-bottom: none;
+}
+
+.modal-title {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.modal-title i {
+    margin-right: 10px;
+    font-size: 1.5rem;
+}
+
+.modal-body {
+    padding: 25px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.vehicle-section {
+    margin-bottom: 25px;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 20px;
+}
+
+.vehicle-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.vehicle-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 1.2rem;
+    color: #4b6cb7;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.vehicle-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #495057;
+    margin: 0;
+}
+
+.vehicle-count {
+    background: #4b6cb7;
+    color: white;
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-size: 0.8rem;
+    margin-left: 10px;
+}
+
+.taxi-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: all 0.3s;
+}
+
+.taxi-item:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+}
+
+.taxi-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 1rem;
+    color: #4b6cb7;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.taxi-details {
+    flex: 1;
+}
+
+.taxi-name {
+    font-weight: 500;
+    margin: 0;
+    color: #495057;
+}
+
+.taxi-distance {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin: 0;
+}
+
+.taxi-action {
+    margin-left: 10px;
+}
+
+.btn-sm {
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+.no-vehicles {
+    text-align: center;
+    padding: 20px;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(75, 108, 183, 0.3);
+    border-radius: 50%;
+    border-top-color: #4b6cb7;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.btn-close {
+    filter: invert(1);
+}
+
+@media (max-width: 576px) {
+    .modal-body {
+        padding: 20px;
+    }
+
+    .vehicle-title {
+        font-size: 1rem;
+    }
+
+    .taxi-item {
+        padding: 10px;
+    }
+}
+
+.modal-content {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: none;
+}
+
+.modal-header {
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    color: white;
+    padding: 20px;
+    border-bottom: none;
+
+}
+
+.modal-title {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.modal-title i {
+    margin-right: 10px;
+    font-size: 1.5rem;
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+.ride-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.ride-detail {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-title {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.detail-title i {
+    color: #4b6cb7;
+    margin-right: 8px;
+}
+
+.detail-value {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.fare-amount {
+    grid-column: span 2;
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.btn-confirm {
+    grid-column: span 2;
+    background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-confirm:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+}
+
+.btn-close {
+    filter: invert(1);
+}
+
+.route-visual {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.route-dots {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot-start {
+    background: #4b6cb7;
+}
+
+.dot-end {
+    background: #28a745;
+}
+
+.route-line {
+    width: 2px;
+    height: 30px;
+    background: #dee2e6;
+    margin: 5px 0;
+}
+
+.route-addresses {
+    flex: 1;
+}
+
+.address {
+    margin-bottom: 10px;
+}
+
+.address:last-child {
+    margin-bottom: 0;
+}
+
+.address-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.address-text {
+    color: #6c757d;
+}
+
+@media (max-width: 768px) {
+    .ride-details {
+        grid-template-columns: 1fr;
+    }
+
+    .fare-amount, .btn-confirm {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 576px) {
+    .modal-body {
+        padding: 20px;
+    }
+
+    .route-visual {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .route-dots {
+        flex-direction: row;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .route-line {
+        width: 30px;
+        height: 2px;
+        margin: 0 5px;
+    }
+}
+
+
+/* General container styles */
+#driverView {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+}
+
+/* Header styles */
+header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+header .subtitle {
+    font-size: 1.1rem;
+    color: #6c757d;
+    font-weight: 400;
+}
+
+/* Drivers container */
+.drivers-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Driver card */
+.driver-card {
+    background-color: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.driver-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Driver header card */
+.driver-header-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.driver-id {
+    font-size: 1rem;
+    color: #495057;
+    font-weight: 500;
+}
+
+.driver-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* Driver info */
+.driver-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-icon {
+    color: #007bff;
+    font-size: 1.2rem;
+}
+
+.info-text {
+    font-size: 0.95rem;
+    color: #343a40;
+}
+
+.info-text b {
+    color: #1a1a1a;
+}
+
+/* Mobile warning */
+.mobile-warning {
+    color: #dc3545;
+    font-weight: 500;
+}
+
+/* Additional details */
+.additional-details {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e9ecef;
+}
+
+.additional-details p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.additional-details p b {
+    color: #1a1a1a;
+}
+
+.driver-actions {
+    margin-top: 15px;
+    text-align: right;
+}
+
+.btn-remove {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-remove:hover {
+    background-color: #c82333;
+}
+
+.btn-remove i {
+    margin-right: 5px;
+}
+
+/* Empty state */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    text-align: center;
+    color: #6c757d;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: #adb5bd;
+}
+
+.empty-state p {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .drivers-container {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    header .subtitle {
+        font-size: 1rem;
+    }
+
+    .driver-card {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    #driverView {
+        padding: 15px;
+    }
+
+    .driver-header-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .driver-avatar {
+        margin-bottom: 10px;
+    }
+}

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Passenger Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../css/Passenger.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+</head>
+<body>
+        <section id="detailSection" class="row justify-content-between align-content-center pt-3 pb-3">
+            <div id="logoDiv" class="col-sm-3 p-0 ms-5 justify-content-center align-content-center">
+                <h4>Just Ride</h4>
+            </div>
+            <div id="notifyDiv" class="col-sm-3 p-0 me-5 d-flex justify-content-end gap-4">
+                <button type="button" class="btn btn-primary btnHeader" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Notification">
+                    <i class="bi bi-bell-fill"></i>
+                </button>
+                <button type="button" class="btn btn-primary btnHeader" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Message" id="notifyBtn2">
+                    <i class="bi bi-chat-fill"></i>
+                </button>
+                <button type="button" class="btn btn-primary btnHeader" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Setting" id="notifyBtn3">
+                    <i class="bi bi-gear-wide-connected"></i>
+                </button>
+                <button type="button" class="btn btn-primary btnHeader" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout" id="notifyBtn4">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </div>
+        </section>
+
+        <section id="headerSection" class="p-3 d-flex align-items-center">
+             <div id="profilePhoto" class="ms-5 justify-content-center align-content-center align-items-center text-center">
+                 <i class="fa-solid fa-circle-user"></i>
+             </div>
+            <div class="ms-3 justify-content-center align-content-center">
+                <h4>Welcome back, <span>name</span></h4>
+                <h6>Ready for your next ride?</h6>
+            </div>
+        </section>
+
+        <section id="contentSection" class="row container-fluid p-0 m-0 gap-3 justify-content-center pt-5 pb-5">
+
+            <section id="statusSection" class="col-11 col-lg-11 col-sm-10 col-md-10 p-5 border justify-content-between align-items-center">
+                <div class="row justify-contents-between align-items-center">
+                        <div class="col-12 col-md-6 col-lg-3 staticsCards">
+                            <div class="card m-0 shadow" id="rides">
+                                <div class="card-body row m-0 p-0 align-items-center">
+                                    <div class="col-4 text-center">
+                                        <i class="fa-solid fa-car cardIcon" id="totalRide"></i>
+                                    </div>
+                                    <div class="col-8 text-center">
+                                        <label class="count">5</label>
+                                        <p class="card-text">Total Rides</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3 staticsCards">
+                            <div class="card m-0 shadow" id="savings">
+                                <div class="card-body row m-0 p-0 align-items-center">
+                                    <div class="col-4 text-center">
+                                        <i class="fa-solid fa-money-bill-wave cardIcon" id="totalSavings"></i>
+                                    </div>
+                                    <div class="col-8 text-center">
+                                        <label class="count">5</label>
+                                        <p class="card-text">Savings</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3 staticsCards">
+                            <div class="card m-0 shadow" id="rating">
+                                <div class="card-body row m-0 p-0 align-items-center">
+                                    <div class="col-4 text-center">
+                                        <i class="fa-solid fa-star cardIcon" id="ratings"></i>
+                                    </div>
+                                    <div class="col-8 text-center">
+                                        <label class="count">5</label>
+                                        <p class="card-text">Average Rating</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-3 staticsCards">
+                            <div class="card m-0 shadow" id="bonus">
+                                <div class="card-body row m-0 p-0 align-items-center">
+                                    <div class="col-4 text-center">
+                                        <i class="fa-solid fa-gift cardIcon" id="activeBonus"></i>
+                                    </div>
+                                    <div class="col-8 text-center">
+                                        <label class="count">5</label>
+                                        <p class="card-text">Active Bonus</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </section>
+
+            <section id="bookRide" class="col-11 col-lg-11 col-sm-10 col-md-10 p-5 border row justify-content-between">
+                <div class="col-11 col-lg-7 col-sm-11 col-md-11 shadow rounded m-0 p-0">
+                    <div class="m-0 p-3">
+                        <h4 class="ms-0" id="title">Plan Your Trip</h4>
+                        <p>Enter your pickup and destination details</p>
+                        <hr>
+                    </div>
+                    <section id="mapDiv" class="m-2">
+                        <div id="map"></div>
+                        <div id="mapButton">
+                            <button id="hide">Done</button>
+                        </div>
+                    </section>
+
+                    <div class="row col-12 m-0 p-3" id="rideInfo">
+                        <div class="col-12">
+                            <h5><i class="fas fa-map-marker-alt"></i> PickUp Location</h5>
+                            <div class="d-flex gap-3">
+                                <input type="text" class="form-control" id="pickUp" placeholder="Current Location" disabled>
+                                <button type="button" id="btnPickup">Use Map</button>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <h5><i class="fa-solid fa-map-pin"></i> DropOff Location</h5>
+                            <div class="d-flex gap-3">
+                                <input type="text"  class="form-control" id="drop" placeholder="Select On Map" disabled>
+                                <button type="button" id="btnDrop">Use Map</button>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <h5><i class="fa-solid fa-clock"></i> PickUp Time</h5>
+                            <div class="d-flex gap-3">
+                                <input type="text"  class="form-control" id="timeInput" placeholder="PickUp Now" disabled>
+                                <button type="button" id="btnSetTime">Set Time</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-evenly align-content-center p-3">
+                        <button type="button" id="btnBookNow">Book Now</button>
+                    </div>
+                    <div id="nearestDiv">
+
+                    </div>
+                </div>
+
+                <div class="container col-11 col-lg-4 col-sm-11 col-md-11 p-0 m-0 shadow rounded">
+                    <div class="m-0 p-3">
+                        <h4 class="ms-0">Upcoming Rides</h4>
+                    </div>
+                    <hr>
+                    <div class="drivers-container" id="passengerDiv">
+
+                    </div>
+
+                    <div class="empty-state" id="emptyPassengerState">
+                        <i class="fas fa-users"></i>
+                        <p>No rides to show.</p>
+                    </div>
+                </div>
+
+            </section>
+        </section>
+
+        <div class="modal fade mt-5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" id="confirmRidesModal">
+            <div class="modal-dialog modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="fas fa-check-circle me-2"></i>Confirm Your Ride</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="ride-details">
+                            <div class="ride-detail">
+                                <span class="detail-title"><i class="fas fa-car me-2"></i>Vehicle Type</span>
+                                <span class="detail-value" id="vehicle">Standard Car</span>
+                            </div>
+                            <div class="ride-detail">
+                                <span class="detail-title"><i class="fas fa-car me-2"></i>Vehicle Number</span>
+                                <span class="detail-value" id="vehicleNumber">Standard Car</span>
+                            </div>
+                            <div class="ride-detail">
+                                <span class="detail-title"><i class="fa-solid fa-person me-2"></i>Driver Name</span>
+                                <span class="detail-value" id="driverName">Name</span>
+                            </div>
+                            <div class="ride-detail">
+                                <span class="detail-title"><i class="fa-solid fa-mobile me-2"></i>Mobile Number</span>
+                                <span class="detail-value" id="mobileNumber">Mobile Number</span>
+                            </div>
+                            <div class="ride-detail">
+                                <span class="detail-title"><i class="fas fa-route me-2"></i>Distance</span>
+                                <span class="detail-value" id="rideKm">5.2 km</span>
+                            </div>
+                            <div class="ride-detail">
+                                <span class="detail-title"><i class="fas fa-clock me-2"></i>Estimated Time</span>
+                                <span class="detail-value" id="rideTime">15 min</span>
+                            </div>
+
+                            <div class="ride-detail">
+                                <span class="detail-title"><i class="fas fa-tag me-2"></i>Base Fare</span>
+                                <span class="detail-value">LKR 100.00</span>
+                            </div>
+                            <div class="ride-detail">
+                                <span class="detail-title"><i class="fas fa-road me-2"></i>Distance Fare</span>
+                                <span class="detail-value" id="distanceFare">LKR 78.00</span>
+                            </div>
+
+                            <div class="fare-amount">
+                                Total Fare: LKR <span id="rideFare">223.00</span>
+                            </div>
+
+                            <button id="btnConfirmRide" type="button" class="btn btn-confirm">
+                                <i class="fas fa-check-circle me-2"></i>Confirm & Book Ride
+                            </button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="nearbyTaxisModal" tabindex="-1" aria-labelledby="nearbyTaxisModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="nearbyTaxisModalLabel"><i class="fas fa-taxi"></i>Nearby Taxis</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="loadingSection" class="loading-spinner">
+                            <div class="spinner"></div>
+                        </div>
+
+                        <div id="taxisContainer" style="display: none;">
+
+                        </div>
+
+                        <div id="noTaxisMessage" class="no-vehicles" style="display: none;">
+                            <i class="fas fa-taxi fa-2x mb-3"></i>
+                            <p>No taxis available in your area at the moment.</p>
+                            <p class="small">Please try again later or expand your search range.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<script type="module" src="../js/firebase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script type="module" src="../js/passenger.js"></script>
+
+</body>
+</html>

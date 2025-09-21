@@ -1,0 +1,215 @@
+:root {
+    --primary: #3a86ff;
+    --secondary: #ff006e;
+    --accent: #8338ec;
+    --dark: #1a1a2e;
+    --light: #f8f9fa;
+    --gray: #6c757d;
+    --success: #2ec4b6;
+    --warning: #ff9f1c;
+    --danger: #e71d36;
+}
+
+body{
+    margin:0;
+    padding:0;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--dark);
+    background-color: #f5f7fb;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.sidebar {
+    width: 20%;
+    height: 100vh;
+    position: fixed;
+    background: linear-gradient(180deg, var(--dark) 0%, #2d2d4e 100%);
+    color: white;
+    top: 0;
+    left: 0;
+    padding: 20px 0;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    overflow-y: auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    padding: 0 20px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
+.admin-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.admin-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--primary);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    font-size: 2rem;
+}
+
+.admin-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.admin-role {
+    font-size: 0.9rem;
+    color: var(--gray);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: 15px;
+}
+
+.nav-menu {
+    padding: 0 10px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-item:hover, .nav-item.active {
+    background: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    color: white;
+}
+
+.nav-item i {
+    margin-right: 12px;
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+}
+
+.nav-item span {
+    font-size: 1rem;
+}
+
+
+/* Responsive styles */
+@media (max-width: 992px) {
+    .sidebar {
+        width: 70px;
+        overflow: hidden;
+    }
+
+    #navigation{
+        width: 70px;
+        overflow: hidden;
+    }
+
+    #others {
+        margin-left: 70px; /* matches new sidebar width */
+        width: calc(100% - 70px);
+    }
+    .sidebar .logo h1,
+    .sidebar .admin-profile,
+    .sidebar .admin-name,
+    .sidebar .admin-role,
+    .sidebar .nav-item span {
+        display: none;
+    }
+
+    .sidebar .logo {
+        justify-content: center;
+        padding: 0 0 20px;
+    }
+
+    .sidebar .logo-icon {
+        margin-right: 0;
+    }
+
+    .sidebar .nav-item {
+        justify-content: center;
+        padding: 15px;
+    }
+
+    .sidebar .nav-item i {
+        margin-right: 0;
+        font-size: 1.4rem;
+    }
+
+    .sidebar.expanded {
+        width: 260px;
+    }
+
+    .sidebar.expanded .logo h1,
+    .sidebar.expanded .admin-profile,
+    .sidebar.expanded .admin-name,
+    .sidebar.expanded .admin-role,
+    .sidebar.expanded .nav-item span {
+        display: block;
+    }
+
+    .sidebar.expanded .logo {
+        justify-content: start;
+        padding: 0 20px 20px;
+    }
+
+    .sidebar.expanded .logo-icon {
+        margin-right: 12px;
+    }
+
+    .sidebar.expanded .nav-item {
+        justify-content: start;
+        padding: 12px 20px;
+    }
+
+    .sidebar.expanded .nav-item i {
+        margin-right: 12px;
+        font-size: 1.2rem;
+    }
+
+}

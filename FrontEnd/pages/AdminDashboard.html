@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/AdminDashboard.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<section id="container" class="row m-0 p-0">
+  <section id="navigationSection">
+    <nav class="sidebar" id="sidebar">
+      <div class="logo">
+        <div class="logo-icon">JR</div>
+        <h1>Just Ride</h1>
+      </div>
+
+      <div class="admin-profile">
+        <div class="admin-avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="admin-name">David Silva</div>
+        <div class="admin-role">Administrator</div>
+      </div>
+
+      <div class="nav-menu">
+        <a href="#" class="nav-item active">
+          <i class="fas fa-home"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item" id="liveTracking">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Live Tracking</span>
+        </a>
+        <a href="#" class="nav-item" id="ridesDetails">
+          <i class="fas fa-car"></i>
+          <span>Rides</span>
+        </a>
+        <a href="#" class="nav-item" id="driverManagement">
+          <i class="fas fa-users"></i>
+          <span>Driver Management</span>
+        </a>
+        <a href="#" class="nav-item" id="passengerManagement">
+          <i class="fas fa-user-friends"></i>
+          <span>Passenger Management</span>
+        </a>
+        <a href="#" class="nav-item" id="addMember">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Add Member</span>
+        </a>
+        <a href="#" class="nav-item">
+          <i class="fas fa-money-bill-wave"></i>
+          <span>Finance</span>
+        </a>
+
+        <a href="#" class="nav-item">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </a>
+      </div>
+    </nav>
+  </section>
+
+  <section id="contentSection"  class="row container-fluid p-0 m-0 gap-3 justify-content-center">
+
+    <section id="headerSection" class="p-3 d-flex align-items-center">
+      <div class="ms-3 justify-content-center align-content-center">
+        <h4>Welcome back, <span>name</span></h4>
+        <h6>Ready to manage your drivers, passengers, and trips?</h6>
+      </div>
+    </section>
+
+    <section id="statusSection" class="col-11 col-lg-11 col-sm-10 col-md-10 p-5 border">
+      <div class="row justify-content-between align-items-center">
+        <div class="col-12 col-md-6 col-lg-3 staticsCards">
+          <div class="card m-0 pt-3 pb-3 shadow" id="rides">
+            <div class="card-body row m-0 p-0 align-items-center">
+              <div class="col-4 text-center">
+                <i class="fa-solid fa-car cardIcon" id="totalRide"></i>
+              </div>
+              <div class="col-8 text-center">
+                <label class="count">5</label>
+                <p class="card-text">Total Rides</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 staticsCards">
+          <div class="card m-0 pt-3 pb-3 shadow" id="savings">
+            <div class="card-body row m-0 p-0 align-items-center">
+              <div class="col-4 text-center">
+                <i class="fa-solid fa-money-bill-wave cardIcon" id="totalSavings"></i>
+              </div>
+              <div class="col-8 text-center">
+                <label class="count">5</label>
+                <p class="card-text">Total Revenue</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 staticsCards">
+          <div class="card m-0 pt-3 pb-3 shadow" id="rating">
+            <div class="card-body row m-0 p-0 align-items-center">
+              <div class="col-4 text-center">
+                <i class="fa-solid fa-users cardIcon" id="ratings"></i>
+              </div>
+              <div class="col-8 text-center">
+                <label class="count">5</label>
+                <p class="card-text">Registered Users</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3 staticsCards">
+          <div class="card m-0 pt-3 pb-3 shadow" id="bonus">
+            <div class="card-body row m-0 p-0 align-items-center">
+              <div class="col-4 text-center">
+                <i class="fa-solid fa-blog cardIcon" id="activeBonus"></i>
+              </div>
+              <div class="col-8 text-center">
+                <label class="count">5</label>
+                <p class="card-text">Active Drivers</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="rideSection" class="col-11 col-lg-11 col-sm-10 col-md-10 p-5 border">
+      <section id="mapSection" class="row col-12 col-lg-12 col-sm-12 justify-content-center">
+        <div class="col-12 col-lg-6 col-sm-12 col-md-12">
+          <div class="shadow p-3">
+            <h5>Live Drivers Tracking</h5>
+            <hr>
+            <div id="mapView"></div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6 col-sm-12 col-md-12">
+          <div class="shadow p-3" id="acceptDrivers">
+            <h5>Accept Drivers</h5>
+            <hr>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section id="staticsSection" class="col-11 col-lg-11 col-sm-10 col-md-10 p-5 border">
+      <section class="row col-12 col-lg-12 col-sm-12 justify-content-center">
+        <div class="p-3 col-12 col-lg-6 col-sm-12">
+          <h5>Revenue Overview</h5>
+          <hr>
+          <canvas id="earningsChart"></canvas>
+        </div>
+        <div class="p-3 col-12 col-lg-6 col-sm-12">
+          <h5>Rides Overview</h5>
+          <hr>
+          <canvas id="ridesChart"></canvas>
+        </div>
+      </section>
+    </section>
+
+    <section id="largeMapView" class="col-11 col-lg-11 col-sm-10 col-md-10 p-5 border">
+      <div class="col-12 col-lg-12 col-sm-12">
+        <div class="shadow p-3">
+          <h5>Live Drivers Tracking</h5>
+          <hr>
+          <div id="mapViewLarge"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ridesView" class="col-11 col-lg-11 col-sm-10 col-md-10 p-5 border">
+      <div class="col-12 col-lg-12 col-sm-12">
+        <div class="shadow p-3">
+          <h5>rides</h5>
+          <hr>
+          <div id="ridesContainer"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="driverView" class="col-11 col-lg-11 col-sm-10 col-md-10 p-5 border">
+      <div class="container">
+        <header class="row">
+          <h1>Driver Management</h1>
+          <p class="subtitle">View and manage all drivers in the system</p>
+        </header>
+        <div class="row p-5 m-0 c0l-4 col-lg-4 col-sm-5 col-md-5">
+          <select id="driver-filter">
+            <option value="all">All Drivers</option>
+            <option value="verified">Verified Drivers</option>
+            <option value="pending">Pending Drivers</option>
+          </select>
+        </div>
+
+        <div class="drivers-container" id="driverDiv">
+
+        </div>
+
+        <div class="empty-state" id="emptyState">
+          <i class="fas fa-users"></i>
+          <p>No drivers found.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="passengerView" class="col-11 col-lg-11 col-sm-10 col-md-10 p-5 border">
+      <div class="container">
+        <header class="row">
+          <h1>Passenger Management</h1>
+          <p class="subtitle">View and manage all passengers in the system</p>
+        </header>
+
+        <div class="drivers-container" id="passengerDiv">
+
+        </div>
+
+        <div class="empty-state" id="emptyPassengerState">
+          <i class="fas fa-users"></i>
+          <p>No passenger found.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="financialSection" class="col-11 col-lg-11 col-sm-10 col-md-10 p-5 border">
+      <div class="container row justify-content-center  align-content-center">
+        <header class="row">
+          <h1>Financial Management</h1>
+          <p class="subtitle">Manage passenger charges and driver payouts in one place</p>
+        </header>
+
+        <form class="row g-3 needs-validation" novalidate id="financialForm">
+          <div class="form-floating mb-3 mt-0">
+            <h4>Set Fare Values</h4>
+          </div>
+          <div class="col-md-12 mb-3 mt-0">
+            <select id="vehicleType" class="form-select mt-3">
+              <option selected disabled>Select Type</option>
+            </select>
+          </div>
+          <div class="form-floating mb-3 mt-0">
+            <input type="number" class="form-control" id="baseFare" placeholder="Base Fare (Rs)" required>
+            <label for="baseFare">Base Fare (Rs)</label>
+          </div>
+          <div class="form-floating mb-3 mt-0">
+            <input type="number" class="form-control" id="perKMRate" placeholder="Per KM Rate (Rs)" required>
+            <label for="perKMRate">Per KM Rate (Rs)</label>
+          </div>
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary" id="btnAddFare" type="button">Update</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+
+    <section id="addMembersSection" class="col-11 col-lg-11 col-sm-10 col-md-10 p-5 border">
+      <div class="container row justify-content-center  align-content-center">
+        <header class="row">
+          <h1>Add New Member</h1>
+          <p class="subtitle">Add New Member
+            Enter information to register a new member</p>
+        </header>
+      <form class="row g-3 needs-validation" novalidate id="registrationForm">
+        <input type="hidden" id="roleInput" name="role" value="">
+        <div class="form-floating mb-3 mt-0">
+          <input type="text" class="form-control" id="fullName" placeholder="Full Name" required>
+          <label for="fullName">Full Name</label>
+        </div>
+        <div class="form-floating mb-3 mt-0">
+          <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" required>
+          <label for="floatingEmail">Email</label>
+        </div>
+        <div class="form-floating mb-3 mt-0">
+          <input type="text" class="form-control" id="mobileNumber" placeholder="Mobile Number" required>
+          <label for="mobileNumber">Mobile Number</label>
+        </div>
+
+        <div class="form-floating mb-3 mt-0">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+          <label for="floatingPassword">Password</label>
+          <button type="button" class="showPassword" id="showPW"> <i id="showPWIcon" class="bi bi-eye-slash"></i></button>
+        </div>
+        <div class="form-floating mb-3 mt-0">
+          <input type="password" class="form-control" id="floatingConfirmPassword" placeholder="Confirm Password" required>
+          <label for="floatingConfirmPassword">Confirm Password</label>
+          <button type="button" id="showConPW" class="showPassword"> <i id="showConPWIcon" class="bi bi-eye-slash"></i></button>
+        </div>
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary" id="btnAddMember" type="button">Add Member</button>
+        </div>
+      </form>
+      </div>
+    </section>
+
+  </section>
+</section>
+
+<script type="module" src="../js/firebase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script type="module" src="../js/AdminDashboard.js"></script>
+<script type="module" src="../js/Token.js"></script>
+</body>
+</html>

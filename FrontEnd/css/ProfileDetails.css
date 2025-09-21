@@ -1,0 +1,86 @@
+#personalInfo select{
+    height: 40px;
+}
+
+.formTitle{
+    background-color: #4b6cb7;
+    color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+#titleSection{
+    background-color: #2c3e50;
+    color: white;
+}
+
+#verificationSection,#vehicleInfo,#personalInformation,#profileSection{
+    background-color: white;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#accountID,#fullName,#mobileNumber,#email,#idCardNumber,#licenseCardNumber,#addressLine1,#addressLine2,#workingDistrict,#workingType,#vehicleType,
+#vehicleNumber,#vehicleMake,#vehicleModel{
+    border: none;
+    border-bottom: 2px solid black;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.idCardDiv{
+    position: relative;
+    border: 2px dashed rgba(215, 146, 237, 0.85);
+    border-radius: 15px;
+    height: 10rem;
+    text-align: center;
+    align-content: center;
+    cursor: pointer;
+    background-color: rgba(167, 0, 255, 0.11);
+}
+
+.previews{
+    height: 10rem;
+    width: 100%;
+}
+
+#idCardFrontInput,#idCardBackInput,#licenseFrontInput,#licenseBackInput{
+    display: none;
+}
+
+#verificationSection span{
+    font-size: 0.8rem;
+}
+
+#profileImage{
+    display: none;
+}
+
+#profilePicture{
+    background-color: rgba(108, 117, 125, 0.15);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    text-align: center;
+    align-content: center;
+    cursor: pointer;
+}
+
+#profile {
+    display: block;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#profilePicture:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+#showText{
+    display: none;
+}
