@@ -20,6 +20,11 @@ A comprehensive web-based taxi booking platform built with **Java Spring Boot** 
 
 <img width="1901" height="1034" alt="Capture5" src="https://github.com/user-attachments/assets/95fedc31-dca5-4ee7-a3c7-cbaf12814deb" />
 
+## 🎥 Video Demo
+
+**Watch the complete demo:** [https://youtu.be/HAwBTDGSvXE](https://youtu.be/HAwBTDGSvXE)
+
+---
 
 ## 📋 Table of Contents
 
@@ -1078,3 +1083,6 @@ Examples:
 - Fix: Driver location update bug
 - Update: Improve fare calculation algorithm
 - Docs: Add API documentation for ride
+
+
+
