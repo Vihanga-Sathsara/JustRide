@@ -8,6 +8,19 @@ A comprehensive web-based taxi booking platform built with **Java Spring Boot** 
 [![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white)](https://jwt.io/)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3+-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 
+<img width="1920" height="1035" alt="Capture" src="https://github.com/user-attachments/assets/4176edeb-3f7a-41fd-ae5e-4356b6ad84b8" />
+
+<img width="1920" height="1039" alt="Capture1" src="https://github.com/user-attachments/assets/42b6077e-b249-4da7-bc6a-4183a16a4b2a" />
+
+<img width="1920" height="1032" alt="Capture2" src="https://github.com/user-attachments/assets/0f8be71b-275b-4ea3-98e6-ac29ca95b135" />
+
+<img width="1906" height="1035" alt="Capture3" src="https://github.com/user-attachments/assets/d288f083-c0f6-4d2f-90cb-8025560a1330" />
+
+<img width="1881" height="1021" alt="Capture4" src="https://github.com/user-attachments/assets/600beb1b-5b97-4526-92ab-1b4689c98f32" />
+
+<img width="1901" height="1034" alt="Capture5" src="https://github.com/user-attachments/assets/95fedc31-dca5-4ee7-a3c7-cbaf12814deb" />
+
+
 ## 📋 Table of Contents
 
 - [🎯 Project Overview](#-project-overview)
@@ -775,4 +788,293 @@ services:
       - mysql
     environment:
       SPRING_PROFILES_ACTIVE: prod
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/justride
+      SPRING_DATASOURCE_USERNAME: justride_user
+      SPRING_DATASOURCE_PASSWORD: justride_password
+    ports:
+      - "8080:8080"
+    networks:
+      - justride-network
+    restart: unless-stopped
+
+  frontend:
+    image: nginx:alpine
+    container_name: justride-frontend
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+    networks:
+      - justride-network
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+
+networks:
+  justride-network:
+    driver: bridge
+```
+
+**Deploy with Docker Compose:**
+```bash
+# Start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop all services
+docker-compose down
+
+# Rebuild and start
+docker-compose up --build -d
+```
+
+#### 4. Cloud Platform Deployment
+
+**AWS Deployment (Elastic Beanstalk):**
+```bash
+# Install EB CLI
+pip install awsebcli
+
+# Initialize Elastic Beanstalk
+eb init
+
+# Create environment
+eb create justride-prod
+
+# Deploy application
+eb deploy
+
+# Check status
+eb status
+eb health
+```
+
+**Heroku Deployment:**
+```bash
+# Install Heroku CLI
+# Create Procfile
+echo "web: java -jar target/justride-*.jar --server.port=\$PORT" > Procfile
+
+# Initialize git repository
+git init
+git add .
+git commit -m "Initial commit"
+
+# Create Heroku app
+heroku create justride-app
+
+# Add MySQL addon
+heroku addons:create jawsdb:kitefin
+
+# Set environment variables
+heroku config:set SPRING_PROFILES_ACTIVE=prod
+heroku config:set JWT_SECRET=your_jwt_secret
+
+# Deploy
+git push heroku main
+```
+
+### Environment Variables for Production
+
+Create a `.env` file for production deployment:
+
+```bash
+# Database Configuration
+DB_HOST=your_database_host
+DB_PORT=3306
+DB_NAME=justride
+DB_USERNAME=your_db_username
+DB_PASSWORD=your_secure_db_password
+
+# JWT Configuration
+JWT_SECRET=your_very_long_and_secure_jwt_secret_key_here
+JWT_EXPIRATION=86400000
+
+# Google Services
+GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+GOOGLE_OAUTH_CLIENT_ID=your_google_oauth_client_id
+GOOGLE_OAUTH_CLIENT_SECRET=your_google_oauth_client_secret
+
+# Email Configuration (for notifications)
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your_email@gmail.com
+MAIL_PASSWORD=your_app_password
+
+# Application Configuration
+SERVER_PORT=8080
+SPRING_PROFILES_ACTIVE=prod
+```
+
+## 🔍 Monitoring & Maintenance
+
+### Application Monitoring
+
+**Add Spring Boot Actuator for monitoring:**
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
+**Configure monitoring endpoints:**
+```properties
+# Actuator configuration
+management.endpoints.web.exposure.include=health,info,metrics,prometheus
+management.endpoint.health.show-details=always
+management.metrics.export.prometheus.enabled=true
+```
+
+**Health Check Endpoints:**
+- `GET /actuator/health` - Application health status
+- `GET /actuator/info` - Application information
+- `GET /actuator/metrics` - Application metrics
+
+### Database Maintenance
+
+**Backup Script (`scripts/backup_script.sh`):**
+```bash
+#!/bin/bash
+# Database backup script for JustRide
+
+DB_NAME="justride"
+DB_USER="root"
+DB_PASS="your_password"
+BACKUP_DIR="/backup/justride"
+DATE=$(date +"%Y%m%d_%H%M%S")
+
+# Create backup directory if it doesn't exist
+mkdir -p $BACKUP_DIR
+
+# Create backup
+mysqldump -u$DB_USER -p$DB_PASS $DB_NAME > $BACKUP_DIR/justride_backup_$DATE.sql
+
+# Compress backup
+gzip $BACKUP_DIR/justride_backup_$DATE.sql
+
+# Keep only last 7 days of backups
+find $BACKUP_DIR -name "justride_backup_*.sql.gz" -mtime +7 -delete
+
+echo "Backup completed: justride_backup_$DATE.sql.gz"
+```
+
+**Make script executable and schedule:**
+```bash
+chmod +x scripts/backup_script.sh
+
+# Add to crontab for daily backups at 2 AM
+crontab -e
+0 2 * * * /path/to/justride/scripts/backup_script.sh
+```
+
+## 📞 Contact
+
+**Project Developer:** Vihanga Sathsara
+
+- 📧 **Email:** sathsaravihanga27@gmail.com
+- 🐙 **GitHub:** [@Vihanga-Sathsara](https://github.com/Vihanga-Sathsara)
+
+### Support
+- **Issues:** Create an issue on [GitHub Issues](https://github.com/Vihanga-Sathsara/JustRide/issues)
+- **Questions:** Email me directly
+
+---
+
+⭐ **If you found this project helpful, please give it a star!** ⭐
+
+## 🤝 Contributing
+
+We welcome contributions from the community! Here's how you can help make JustRide better:
+
+### How to Contribute
+
+1. **🍴 Fork the Repository**
+   ```bash
+   # Fork on GitHub, then clone your fork
+   git clone https://github.com/YOUR_USERNAME/JustRide.git
+   cd JustRide
+   
+   # Add upstream remote
+   git remote add upstream https://github.com/Vihanga-Sathsara/JustRide.git
+   ```
+
+2. **🌿 Create a Feature Branch**
+   ```bash
+   # Create and switch to feature branch
+   git checkout -b feature/your-feature-name
+   
+   # Or for bug fixes
+   git checkout -b fix/bug-description
+   ```
+
+3. **💻 Make Your Changes**
+   - Follow the existing code style and conventions
+   - Add comprehensive tests for new functionality
+   - Update documentation as needed
+   - Ensure all existing tests pass
+
+4. **✅ Test Your Changes**
+   ```bash
+   # Run all tests
+   mvn test
+   
+   # Run with coverage
+   mvn test jacoco:report
+   
+   # Check code style
+   mvn checkstyle:check
+   ```
+
+5. **📝 Commit Your Changes**
+   ```bash
+   # Stage your changes
+   git add .
+   
+   # Commit with descriptive message
+   git commit -m "Add: Brief description of your changes
+   
+   - Detailed explanation of what was changed
+   - Why the change was necessary
+   - Any breaking changes or migration notes"
+   ```
+
+6. **🚀 Push and Create Pull Request**
+   ```bash
+   # Push to your fork
+   git push origin feature/your-feature-name
+   
+   # Create pull request on GitHub
+   # Provide detailed description of changes
+   ```
+
+### Development Guidelines
+
+#### Code Style Standards
+- **Java**: Follow Google Java Style Guide
+- **JavaScript**: Use ES6+ features and consistent formatting
+- **SQL**: Use uppercase for keywords, meaningful table/column names
+- **Comments**: Write clear, concise comments for complex logic
+
+#### Commit Message Convention
+```
+Type: Brief description (50 characters max)
+
+Detailed explanation of what and why (wrap at 72 characters)
+
+- List specific changes
+- Include any breaking changes
+- Reference issue numbers if applicable
+
+Examples:
+- Add: New ride cancellation feature
+- Fix: Driver location update bug
+- Update: Improve fare calculation algorithm
+- Docs: Add API documentation for ride
